@@ -1,0 +1,24 @@
+{
+  "expo": {
+    "name": "COVID19 INDIA",
+    "description": "COVID19 INDIA TRACKING APP",
+    "slug": "CoronaTracker",
+    "privacy": "public",
+    "platforms": [
+      "android"
+    ],
+    "version": "1.0.4",
+    "orientation": "portrait",
+    "icon": "./assets/images/bacteria.png",
+    "updates": {
+      "fallbackToCacheTimeout": 0
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "android": {
+      "package": "in.covid19",
+      "versionCode": 4
+    }
+  }
+}
