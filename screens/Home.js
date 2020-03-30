@@ -11,6 +11,7 @@ import {
   TouchableOpacity,
   Button,
   TouchableHighlight,
+  TouchableNativeFeedback,
   Linking
 } from "react-native";
 import { Dropdown } from "react-native-material-dropdown";
@@ -21,8 +22,19 @@ console.disableYellowBox = true;
 //import tema
 import * as theme from "../Theme";
 import _ from "lodash";
+import Carousel from "react-native-banner-carousel";
 
 const { width, height } = Dimensions.get("screen");
+
+const BannerWidth = Dimensions.get("window").width;
+const BannerHeight = 260;
+
+const images = [
+  require("../assets/images/whatsapp_help.jpg"),
+  require("../assets/images/facebook_help.jpg"),
+  require("../assets/images/telegram_help.jpg"),
+  // require("../assets/images/banner.jpg")
+];
 
 const format = amount => {
   return Number(amount)
@@ -73,6 +85,51 @@ class Home extends React.Component {
       this.setState({ uts: uts });
     });
   }
+  renderPage(image, index) {
+    return (
+      <TouchableNativeFeedback
+        onPress={() => {
+          // ToastAndroid.show(index+'', ToastAndroid.LONG)
+          if (index == 0){
+            Linking.openURL('https://t.co/D5cznbq8B5')
+          }
+          else if (index == 1){
+            Linking.openURL('https://facebook.com/MyGovIndia')
+          }
+          else if (index == 2){
+            Linking.openURL('https://t.me/MyGovCoronaNewsdesk')
+          }
+          // else if (index == 3){
+          //   // Linking.openURL('https://github.com/shushant/covid-android-app')
+          // }
+        }}
+      >
+        <View key={index}>
+          <Image
+            resizeMode="stretch"
+            style={{ width: BannerWidth, height: BannerHeight * 0.65 }}
+            source={image}
+          />
+        </View>
+      </TouchableNativeFeedback>
+    );
+  }
+
+  renderBanner = () => {
+    return (
+      <View style={styles.container_banner}>
+        <Carousel
+          autoplay
+          autoplayTimeout={5000}
+          loop
+          index={0}
+          pageSize={BannerWidth}
+        >
+          {images.map((image, index) => this.renderPage(image, index))}
+        </Carousel>
+      </View>
+    );
+  };
   renderStatusGlobal = () => {
     return (
       <View style={styles.status}>
@@ -200,6 +257,7 @@ class Home extends React.Component {
     return (
       <PTRView onRefresh={this._refresh} style={styles.container}>
         <View style={{ flex: 1 }}>
+          {this.renderBanner()}
           <Text style={styles.title}>Summary</Text>
 
           {/* <Button onPress={() => this.props.navigation.navigate('Provinsi')} title="Details"/> */}
@@ -217,6 +275,11 @@ const styles = StyleSheet.create({
     backgroundColor: theme.colors.background,
     flex: 1,
     flexDirection: "column"
+  },
+  container_banner: {
+    flex: 1,
+    backgroundColor: "#fff",
+    justifyContent: "center"
   },
   rapih: {
     height: height / 3.7,

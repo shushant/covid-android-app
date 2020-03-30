@@ -7,7 +7,7 @@
     "platforms": [
       "android"
     ],
-    "version": "1.0.4",
+    "version": "1.0.5",
     "orientation": "portrait",
     "icon": "./assets/images/bacteria.png",
     "updates": {
@@ -18,7 +18,8 @@
     ],
     "android": {
       "package": "in.covid19",
-      "versionCode": 4
+      "versionCode": 5,
+      "permissions": []
     }
   }
 }
